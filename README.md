@@ -71,9 +71,9 @@ The output from the renderer is B x H x W x 4. Since our batch is one, we can ju
 the first element of the batch to get an image of H x W x 4. The fourth channel contains
 silhouette information that we will ignore, so we will only keep the 3 RGB channels.
 
-An example of the entire process is available in `starter/render_cow.py`, which loads
+An example of the entire process is available in `starter/render_mesh.py`, which loads
 a sample cow mesh and renders it. Please take a close look at the code and make sure
-you understand how it works. If you run `python -m starter.render_cow`, you should see
+you understand how it works. If you run `python -m starter.render_mesh`, you should see
 the following output:
 
 ![Cow render](images/cow_render.jpg)
