@@ -25,7 +25,7 @@ def dolly_zoom(
     if device is None:
         device = get_device()
 
-    mesh = pytorch3d.io.load_objs_as_meshes(["cow_on_plane/cow_on_plane.obj"])
+    mesh = pytorch3d.io.load_objs_as_meshes(["data/cow_on_plane.obj"])
     mesh = mesh.to(device)
     renderer = get_mesh_renderer(image_size=image_size, device=device)
     lights = pytorch3d.renderer.PointLights(location=[[0.0, 0.0, -3.0]], device=device)
