@@ -1,4 +1,4 @@
-# 16-889 Assignment 1: Rendering Basics with PyTorch3D
+# 16-825 Assignment 1: Rendering Basics with PyTorch3D   (Total: 90 Points + 10 Bonus)
 
 Goals: In this assignment, you will learn the basics of rendering with PyTorch3D,
 explore 3D representations, and practice constructing simple geometry.
@@ -76,9 +76,9 @@ a sample cow mesh and renders it. Please take a close look at the code and make 
 you understand how it works. If you run `python -m starter.render_mesh`, you should see
 the following output:
 
-![Cow render](images/cow_render.jpg)
+![Cow render](images/cow_render.jpg)  
 
-## 1. Practicing with Cameras
+## 1. Practicing with Cameras 
 
 ### 1.1. 360-degree Renders (5 points)
 
@@ -117,7 +117,7 @@ calling `python -m starter.dolly_zoom`.
 
 **On your webpage, include a gif with your dolly zoom effect.**
 
-## 2. Practicing with Meshes
+## 2. Practicing with Meshes   
 
 ### 2.1 Constructing a Tetrahedron (5 points)
 
@@ -129,7 +129,7 @@ obvious from the renderings that the shape is a tetrahedron.
 
 You will need to manually define the vertices and faces of the mesh. Once you have the
 vertices and faces, you can define a single-color texture, similarly to the cow in
-`render_cow.py`. Remember that the faces are the vertex indices of the triangle mesh. 
+`render_mesh.py`. Remember that the faces are the vertex indices of the triangle mesh. 
 
 It may help to draw a picture of your tetrahedron and label the vertices and assign 3D
 coordinates.
@@ -173,8 +173,7 @@ In this case, `color1 = [0, 0, 1]` and `color2 = [1, 0, 0]`.
 **In your submission, describe your choice of `color1` and `color2`, and include a gif of the
 rendered mesh.**
 
-## 4. Camera Transformations (20 points)
-
+## 4. Camera Transformations (10 points)
 When working with 3D, finding a reasonable camera pose is often the first step to
 producing a useful visualization, and an important first step toward debugging.
 
@@ -198,9 +197,7 @@ each of the following images:
 **In your report, describe in words what R_relative and T_relative should be doing
 and include the rendering produced by your choice of R_relative and T_relative.**
 
-
-
-## 5. Rendering Generic 3D Representations
+## 5. Rendering Generic 3D Representations 
 
 The simplest possible 3D representation is simply a collection of 3D points, each
 possibly associated with a color feature. PyTorch3D provides functionality for rendering
@@ -347,8 +344,10 @@ stratified sampling. The procedure is as follows:
 2. Sample a random [barycentric coordinate](https://en.wikipedia.org/wiki/Barycentric_coordinate_system) uniformly
 3. Compute the corresponding point using baricentric coordinates on the selected face.
 
+For this part, write a function that takes a triangle mesh and the number of samples and outputs a point cloud.
 
-For this part, write a function that takes a triangle mesh and the number of samples
-and outputs a point cloud. Then, using the cow mesh, randomly sample 10, 100, 1000, and
-10000 points. **Render each pointcloud and the original cow mesh side-by-side, and
-include the gif in your writeup.***
+Please use a cow mesh from `/data/cow.obj` folder and a joint mesh from `/data/joint_mesh.obj` folder, randomly sample 100, 500, 1000, and 10000 points.  The joint mesh is a combination of Tetrahedron, cube and icosphere. 
+
+**You need to provide the following results to get score**
+1. Render each pointcloud and the original cow mesh side-by-side, and include the gif in your writeup
+2. Render each pointcloud and the original joint_mesh side-by-side, and include the gif in your writeup
