@@ -27,9 +27,9 @@ def render_cow(
     T_relative = torch.tensor(T_relative).float()
     R = R_relative @ torch.tensor([[1.0, 0, 0], [0, 1, 0], [0, 0, 1]])
     T = R_relative @ torch.tensor([0.0, 0, 3]) + T_relative
-    # since the pytorch3d internal uses Point= point@R+t instead of using Point=R @ point+t, 
-    # we need to add R.t() to compensate that. 
-    renderer = get_mesh_renderer(image_size=256)
+    # since the pytorch3d internal uses Point= point@R+t instead of using Point=R @ point+t,
+    # we need to add R.t() to compensate that.
+    renderer = get_mesh_renderer(image_size=image_size)
     cameras = pytorch3d.renderer.FoVPerspectiveCameras(
         R=R.t().unsqueeze(0), T=T.unsqueeze(0), device=device,
     )
@@ -44,5 +44,5 @@ if __name__ == "__main__":
     parser.add_argument("--image_size", type=int, default=256)
     parser.add_argument("--output_path", type=str, default="images/transform_cow.jpg")
     args = parser.parse_args()
-     
+
     plt.imsave(args.output_path, render_cow(cow_path=args.cow_path, image_size=args.image_size))
