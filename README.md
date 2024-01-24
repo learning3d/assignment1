@@ -1,4 +1,4 @@
-# 16-825 Assignment 1: Rendering Basics with PyTorch3D   (Total: 90 Points + 10 Bonus)
+# 16-825 Assignment 1: Rendering Basics with PyTorch3D (Total: 100 Points + 10 Bonus)
 
 Goals: In this assignment, you will learn the basics of rendering with PyTorch3D,
 explore 3D representations, and practice constructing simple geometry.
@@ -17,7 +17,27 @@ Other miscellaneous packages that you will need can be installed using the
 `requirements.txt` file (`pip install -r requirements.txt`).
 
 If you have access to a GPU, the rendering code may run faster, but everything should
-be able to run locally on a CPU.
+be able to run locally on a CPU. Below are some sample installation instruction setup for a Linux Machine.
+
+```bash
+# GPU Installation on a CUDA 11.6 Machine
+conda create -n learning3d python=3.10
+pip install torch --index-url https://download.pytorch.org/whl/cu116 (modify according to your cuda version)
+pip install fvcore iopath
+conda install -c bottler nvidiacub (required for CUDA older than 11.7)
+MAX_JOBS=8 pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable" (this will take some time to compile)
+pip install -r requirements.txt
+
+# CPU Installation
+conda create -n learning3d python=3.10
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+pip install fvcore iopath
+MAX_JOBS=8 pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable"
+pip install -r requirements.txt
+
+```
+
+Make sure that you have gcc $\ge$ 4.9.
 
 ### 0.1 Rendering your first mesh
 
@@ -71,14 +91,14 @@ The output from the renderer is B x H x W x 4. Since our batch is one, we can ju
 the first element of the batch to get an image of H x W x 4. The fourth channel contains
 silhouette information that we will ignore, so we will only keep the 3 RGB channels.
 
-An example of the entire process is available in `starter/render_mesh.py`, which loads
+An example of the entire process is available in `starter/render_cow.py`, which loads
 a sample cow mesh and renders it. Please take a close look at the code and make sure
-you understand how it works. If you run `python -m starter.render_mesh`, you should see
+you understand how it works. If you run `python -m starter.render_cow`, you should see
 the following output:
 
-![Cow render](images/cow_render.jpg)  
+![Cow render](images/cow_render.jpg)
 
-## 1. Practicing with Cameras 
+## 1. Practicing with Cameras
 
 ### 1.1. 360-degree Renders (5 points)
 
@@ -95,8 +115,11 @@ my_images = ...  # List of images [(H, W, 3)]
 imageio.mimsave('my_gif.gif', my_images, fps=15)
 ```
 
-**On your webpage, you should include a gif that shows the cow mesh from many
-continously changing viewpoints.**
+
+> <g>**Submission**</g>: On your webpage, you should include a gif that shows the cow mesh from many
+continously changing viewpoints.
+
+
 
 ### 1.2 Re-creating the Dolly Zoom (10 points)
 
@@ -115,9 +138,9 @@ should look something like this:
 You will make modifications to `starter/dolly_zoom.py`. You can render your gif by
 calling `python -m starter.dolly_zoom`.
 
-**On your webpage, include a gif with your dolly zoom effect.**
+> <g>**Submission**</g>: On your webpage, include a gif with your dolly zoom effect.
 
-## 2. Practicing with Meshes   
+## 2. Practicing with Meshes
 
 ### 2.1 Constructing a Tetrahedron (5 points)
 
@@ -129,13 +152,13 @@ obvious from the renderings that the shape is a tetrahedron.
 
 You will need to manually define the vertices and faces of the mesh. Once you have the
 vertices and faces, you can define a single-color texture, similarly to the cow in
-`render_mesh.py`. Remember that the faces are the vertex indices of the triangle mesh. 
+`render_cow.py`. Remember that the faces are the vertex indices of the triangle mesh. 
 
 It may help to draw a picture of your tetrahedron and label the vertices and assign 3D
 coordinates.
 
-**On your webpage, show a 360-degree gif animation of your tetrahedron.
-Also, list how many vertices and (triangle) faces your mesh should have.**
+> <g>**Submission**</g>: On your webpage, show a 360-degree gif animation of your tetrahedron.
+Also, list how many vertices and (triangle) faces your mesh should have.
 
 ### 2.2 Constructing a Cube (5 points)
 
@@ -143,8 +166,8 @@ Construct a cube mesh and then render it from multiple viewpoints. Remember that
 still working with triangle meshes, so you will need to use two sets of triangle faces
 to represent one face of the cube.
 
-**On your webpage, show a 360-degree gif animation of your cube.
-Also, list how many vertices and (triangle) faces your mesh should have.**
+> <g>**Submission**</g>: On your webpage, show a 360-degree gif animation of your cube.
+Also, list how many vertices and (triangle) faces your mesh should have.
 
 
 ## 3. Re-texturing a mesh (10 points)
@@ -170,10 +193,10 @@ Your final output should look something like this:
 
 In this case, `color1 = [0, 0, 1]` and `color2 = [1, 0, 0]`.
 
-**In your submission, describe your choice of `color1` and `color2`, and include a gif of the
-rendered mesh.**
+> <g>**Submission**</g>: In your submission, describe your choice of `color1` and `color2`, and include a gif of the rendered mesh.
 
-## 4. Camera Transformations (10 points)
+## 4. Camera Transformations (20 points)
+
 When working with 3D, finding a reasonable camera pose is often the first step to
 producing a useful visualization, and an important first step toward debugging.
 
@@ -194,10 +217,11 @@ each of the following images:
 ![Cow render](images/transform4.jpg)
 ![Cow render](images/transform2.jpg)
 
-**In your report, describe in words what R_relative and T_relative should be doing
-and include the rendering produced by your choice of R_relative and T_relative.**
+> <g>**Submission**</g>: In your report, describe in words what R_relative and T_relative should be doing and include the rendering produced by your choice of R_relative and T_relative.
 
-## 5. Rendering Generic 3D Representations 
+
+
+## 5. Rendering Generic 3D Representations
 
 The simplest possible 3D representation is simply a collection of 3D points, each
 possibly associated with a color feature. PyTorch3D provides functionality for rendering
@@ -266,9 +290,9 @@ Try visualizing each of the point clouds from various camera viewpoints. We sugg
 starting with cameras initialized 6 units from the origin with equally spaced azimuth
 values.
 
-**In your submission, include a gif of each of these point clouds side-by-side.**
+> <g>**Submission**</g>:  In your submission, include a gif of each of these point clouds mentioned above side-by-side.
 
-### 5.2 Parametric Functions (10 points)
+### 5.2 Parametric Functions (10 + 5 points)
 
 A parametric function generates a 3D point for each point in the source domain.
 For example, given an elevation `theta` and azimuth `phi`, we can parameterize the
@@ -287,10 +311,13 @@ output with a 100x100 grid of (phi, theta) pairs (`--num_samples 100`) as well a
 Your task is to render a [torus](https://en.wikipedia.org/wiki/Torus) point cloud by
 sampling its parametric function.
 
-**In your writeup, include a 360-degree gif of your torus point cloud, and make sure
-the hole is visible. You may choose to texture your point cloud however you wish.**
+> <g>**Submission**</g>:
+> -  In your writeup, include a 360-degree gif of your torus point cloud, and make sure the hole is visible. You may choose to texture your point cloud however you wish. (10 points)
+> - Include a 360-degree gif on any new object of your choice. (5 points)
 
-### 5.3 Implicit Surfaces (15 points)
+
+
+### 5.3 Implicit Surfaces (15 + 5 points)
 
 In this part, we will explore representing geometry as a function in the form of an implicit function.
 In general, given a function F(x, y, z), we can define the surface to be the zero level-set of F i.e.
@@ -316,10 +343,15 @@ The output should like like this:
 Your task is to render a torus again, this time as a mesh defined by an implicit
 function.
 
-**In your writeup, include a 360-degree gif of your torus mesh, and make sure the hole
-is visible. In addition, discuss some of the tradeoffs between rendering as a mesh
+> <g>**Submission**</g>:
+> -  In your writeup, include a 360-degree gif of your torus mesh, and make sure the hole
+is visible. (10 points)
+> - In addition, discuss some of the tradeoffs between rendering as a mesh
 vs a point cloud. Things to consider might include rendering speed, rendering quality,
-ease of use, memory usage, etc.**
+ease of use, memory usage, etc. (5 points)
+> - Include a 360-degree gif on any new object of your choice. This object can be different from what you used in 5.2 (5 points)
+
+****
 
 ## 6. Do Something Fun (10 points)
 
@@ -328,7 +360,7 @@ is time to try something fun. Create your own 3D structures, or render something
 or creatively texture, or anything else that appeals to you - the (3D) world is your oyster!
 If you wish to download additional meshes,  [Free3D](https://free3d.com/) is a good place to start.
 
-**Include a creative use of the tools in this assignment on your webpage!**
+> <g>**Submission**</g>: Include a creative use of the tools in this assignment on your webpage!
 
 ## (Extra Credit) 7. Sampling Points on Meshes (10 points)
 
@@ -344,10 +376,14 @@ stratified sampling. The procedure is as follows:
 2. Sample a random [barycentric coordinate](https://en.wikipedia.org/wiki/Barycentric_coordinate_system) uniformly
 3. Compute the corresponding point using baricentric coordinates on the selected face.
 
-For this part, write a function that takes a triangle mesh and the number of samples and outputs a point cloud.
 
-Please use a cow mesh from `/data/cow.obj` folder and a joint mesh from `/data/joint_mesh.obj` folder, randomly sample 100, 500, 1000, and 10000 points.  The joint mesh is a combination of Tetrahedron, cube and icosphere. 
+For this part, write a function that takes a triangle mesh and the number of samples
+and outputs a point cloud. Then, using the cow mesh, randomly sample 10, 100, 1000, and
+10000 points. 
 
-**You need to provide the following results to get score**
-1. Render each pointcloud and the original cow mesh side-by-side, and include the gif in your writeup
-2. Render each pointcloud and the original joint_mesh side-by-side, and include the gif in your writeup
+> <g>**Submission**</g>: Render each pointcloud and the original cow mesh side-by-side, and
+include the gif in your writeup.
+
+
+# 8. Attendance
+Please mark your attendance in the [canvas quiz](https://canvas.cmu.edu/courses/38857/quizzes/119664).
