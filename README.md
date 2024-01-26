@@ -44,9 +44,9 @@ Make sure that you have gcc $\ge$ 4.9.
 To render a mesh using Pytorch3D, you will need a mesh that defines the geometry and
 texture of an object, a camera that defines the viewpoint, and a Pytorch3D renderer
 that encapsulates rasterization and shading parameters. You can abstract away the
-renderer using the `get_renderer` wrapper function in `utils.py`:
+renderer using the `get_mesh_renderer` wrapper function in `utils.py`:
 ```python
-renderer = get_renderer(image_size=512)
+renderer = get_mesh_renderer(image_size=512)
 ```
 
 Meshes in Pytorch3D are defined by a list of vertices, faces, and texture information.
@@ -91,9 +91,9 @@ The output from the renderer is B x H x W x 4. Since our batch is one, we can ju
 the first element of the batch to get an image of H x W x 4. The fourth channel contains
 silhouette information that we will ignore, so we will only keep the 3 RGB channels.
 
-An example of the entire process is available in `starter/render_cow.py`, which loads
+An example of the entire process is available in `starter/render_mesh.py`, which loads
 a sample cow mesh and renders it. Please take a close look at the code and make sure
-you understand how it works. If you run `python -m starter.render_cow`, you should see
+you understand how it works. If you run `python -m starter.render_mesh`, you should see
 the following output:
 
 ![Cow render](images/cow_render.jpg)
@@ -152,7 +152,7 @@ obvious from the renderings that the shape is a tetrahedron.
 
 You will need to manually define the vertices and faces of the mesh. Once you have the
 vertices and faces, you can define a single-color texture, similarly to the cow in
-`render_cow.py`. Remember that the faces are the vertex indices of the triangle mesh. 
+`render_mesh.py`. Remember that the faces are the vertex indices of the triangle mesh. 
 
 It may help to draw a picture of your tetrahedron and label the vertices and assign 3D
 coordinates.
