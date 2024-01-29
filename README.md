@@ -195,7 +195,7 @@ In this case, `color1 = [0, 0, 1]` and `color2 = [1, 0, 0]`.
 
 > <g>**Submission**</g>: In your submission, describe your choice of `color1` and `color2`, and include a gif of the rendered mesh.
 
-## 4. Camera Transformations (20 points)
+## 4. Camera Transformations (10 points)
 
 When working with 3D, finding a reasonable camera pose is often the first step to
 producing a useful visualization, and an important first step toward debugging.
