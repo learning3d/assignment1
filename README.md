@@ -235,7 +235,7 @@ To construct a point cloud, use the `PointCloud` class:
 ```python
 points = ...  # 1 x N x 3
 rgb = ...  # 1 x N x 3
-point_cloud = pytorch3d.structures.PointCloud(
+point_cloud = pytorch3d.structures.Pointclouds(
     points=points, features=rgb
 )
 ```
