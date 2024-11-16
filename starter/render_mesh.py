@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import pytorch3d
 import torch
 
-from starter.utils import get_device, get_mesh_renderer, load_cow_mesh
+from utils import get_device, get_mesh_renderer, load_cow_mesh
 
 
 def render_cow(
