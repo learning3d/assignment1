@@ -3,7 +3,7 @@
 Goals: In this assignment, you will learn the basics of rendering with PyTorch3D,
 explore 3D representations, and practice constructing simple geometry.
 
-You may find it also helpful to follow the [Pytorch3D tutorials](https://github.com/facebookresearch/pytorch3d).
+You may also find it helpful to follow the [Pytorch3D tutorials](https://github.com/facebookresearch/pytorch3d).
 
 ## 0. Setup
 
@@ -17,19 +17,23 @@ Other miscellaneous packages that you will need can be installed using the
 `requirements.txt` file (`pip install -r requirements.txt`).
 
 If you have access to a GPU, the rendering code may run faster, but everything should
-be able to run locally on a CPU. Below are some sample installation instruction setup for a Linux Machine.
+be able to run locally on a CPU. Below are some sample installation instructions for a Linux Machine. 
+
+For GPU installation, we recommend CUDA>=11.6.
 
 ```bash
 # GPU Installation on a CUDA 11.6 Machine
 conda create -n learning3d python=3.10
-pip install torch --index-url https://download.pytorch.org/whl/cu116 (modify according to your cuda version)
+conda activate learning3d
+pip install torch --index-url https://download.pytorch.org/whl/cu116 # Modify according to your cuda version. For example, cu121 for CUDA 12.1
 pip install fvcore iopath
 conda install -c bottler nvidiacub (required for CUDA older than 11.7)
-MAX_JOBS=8 pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable" (this will take some time to compile)
+MAX_JOBS=8 pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable" # This will take some time to compile!
 pip install -r requirements.txt
 
 # CPU Installation
 conda create -n learning3d python=3.10
+conda activate learning3d
 pip install torch --index-url https://download.pytorch.org/whl/cpu
 pip install fvcore iopath
 MAX_JOBS=8 pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable"
@@ -78,7 +82,7 @@ cameras = pytorch3d.renderer.FoVPerspectiveCameras(
 ```
 Again, the rotation and translations must be batched. **You should familiarize yourself
 with the [camera coordinate system](https://pytorch3d.org/docs/cameras) that Pytorch3D
-uses. This wil save you a lot of headaches down the line.**
+uses. This will save you a lot of headaches down the line.**
 
 Finally, to render the mesh, call the `renderer` on the mesh, camera, and lighting
 (optional). Our light will be placed in front of the cow at (0, 0, -3).
@@ -112,12 +116,14 @@ set of rotations and translations to align the world to view coordinate system.
 ```python
 import imageio
 my_images = ...  # List of images [(H, W, 3)]
-imageio.mimsave('my_gif.gif', my_images, fps=15)
+duration = 1000 // 15  # Convert FPS (frames per second) to duration (ms per frame)
+imageio.mimsave('my_gif.gif', my_images, duration=duration)
 ```
+You can pass an additional argument `loop=0` to `imageio.mimsave` to make the gif loop.
 
 
 > <g>**Submission**</g>: On your webpage, you should include a gif that shows the cow mesh from many
-continously changing viewpoints.
+continuously changing viewpoints.
 
 
 
@@ -207,7 +213,7 @@ the camera extrinsics rotation `R_0` and translation `T_0`:
 
 
 What are the relative camera transformations that would produce each of the following
-output images? You shoud find a set (R_relative, T_relative) such that the new camera
+output images? You should find a set (R_relative, T_relative) such that the new camera
 extrinsics with `R = R_relative @ R_0` and `T = R_relative @ T_0 + T_relative` produces
 each of the following images:
 
@@ -332,7 +338,7 @@ the 0-level set.
 In practice, we can generate our voxel coordinates using `torch.meshgrid` which we will
 use to query our function (in this case mathematical ones).
 Once we have our voxel grid, we can use the 
-[`mcubes`](https://github.com/pmneila/PyMCubes) library convert into a mesh.
+[`mcubes`](https://github.com/pmneila/PyMCubes) library to convert it into a mesh.
 
 A sample sphere mesh can be constructed implicitly and rendered by calling
 `python -m starter.render_generic --render implicit`.
@@ -366,7 +372,7 @@ If you wish to download additional meshes,  [Free3D](https://free3d.com/) is a g
 
 We will explore how to obtain point clouds from triangle meshes.
 One obvious way to do this is to simply discard the face information and treat the vertices as a point cloud.
-However, this might be unresonable if the faces are not of equal size.
+However, this might be unreasonable if the faces are not of equal size.
 
 
 Instead, as we saw in the lectures, a solution to this problem is to use a uniform sampling of the surface using
@@ -383,7 +389,3 @@ and outputs a point cloud. Then, using the cow mesh, randomly sample 10, 100, 10
 
 > <g>**Submission**</g>: Render each pointcloud and the original cow mesh side-by-side, and
 include the gif in your writeup.
-
-
-# 8. Attendance
-Please mark your attendance in the [canvas quiz](https://canvas.cmu.edu/courses/38857/quizzes/119664).
