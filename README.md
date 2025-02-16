@@ -5,6 +5,16 @@ explore 3D representations, and practice constructing simple geometry.
 
 You may also find it helpful to follow the [Pytorch3D tutorials](https://github.com/facebookresearch/pytorch3d).
 
+## Table of Contents
+0. [Setup](#0-setup)
+1. [Practicing with Cameras](#1-practicing-with-cameras) (15 Points)
+2. [Practicing with Meshes](#2-practicing-with-meshes) (10 Points)
+3. [Re-texturing a mesh](#3-re-texturing-a-mesh-10-points) (10 Points)
+4. [Camera Transformations](#4-camera-transformations-10-points) (10 Points)
+5. [Rendering Generic 3D Representations](#5-rendering-generic-3d-representations) (45 Points)
+6. [Do Something Fun](#6-do-something-fun-10-points) (10 Points)
+7. [Extra Credit](#extra-credit-7-sampling-points-on-meshes-10-points) (10 Points)
+
 ## 0. Setup
 
 You will need to install Pytorch3d. See the directions for your platform
@@ -102,7 +112,7 @@ the following output:
 
 ![Cow render](images/cow_render.jpg)
 
-## 1. Practicing with Cameras
+## 1. Practicing with Cameras (15 Points)
 
 ### 1.1. 360-degree Renders (5 points)
 
@@ -146,7 +156,7 @@ calling `python -m starter.dolly_zoom`.
 
 > <g>**Submission**</g>: On your webpage, include a gif with your dolly zoom effect.
 
-## 2. Practicing with Meshes
+## 2. Practicing with Meshes (10 Points)
 
 ### 2.1 Constructing a Tetrahedron (5 points)
 
@@ -227,7 +237,7 @@ each of the following images:
 
 
 
-## 5. Rendering Generic 3D Representations
+## 5. Rendering Generic 3D Representations (45 Points)
 
 The simplest possible 3D representation is simply a collection of 3D points, each
 possibly associated with a color feature. PyTorch3D provides functionality for rendering
