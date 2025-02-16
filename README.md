@@ -7,8 +7,8 @@ You may also find it helpful to follow the [Pytorch3D tutorials](https://github.
 
 ## Table of Contents
 0. [Setup](#0-setup)
-1. [Practicing with Cameras](#1-practicing-with-cameras) (15 Points)
-2. [Practicing with Meshes](#2-practicing-with-meshes) (10 Points)
+1. [Practicing with Cameras](#1-practicing-with-cameras-15-points) (15 Points)
+2. [Practicing with Meshes](#2-practicing-with-meshes-10-points) (10 Points)
 3. [Re-texturing a mesh](#3-re-texturing-a-mesh-10-points) (10 Points)
 4. [Camera Transformations](#4-camera-transformations-10-points) (10 Points)
 5. [Rendering Generic 3D Representations](#5-rendering-generic-3d-representations) (45 Points)
